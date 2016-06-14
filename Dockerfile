@@ -22,6 +22,7 @@ RUN autoconf
 RUN make -j
 RUN make install
 
+RUN apt install -yq language-pack-ja
 RUN apt autoremove -yq
 
 WORKDIR /freeciv
