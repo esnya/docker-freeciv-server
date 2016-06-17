@@ -16,8 +16,11 @@ WORKDIR /usr/src/freeciv-2.5.4/
 
 RUN apt-get build-dep -yq freeciv
 RUN apt-get install -yq libmysqlclient-dev
-RUN ./autogen.sh --enable-client=stub --enable-fcdb=mysql
-RUN ./configure --enable-client=stub --enable-fcdb=mysql
+
+ENV CONF "--enable-client=stub --enable-fcdb=all"
+RUN ./autogen.sh $CONF
+RUN ./configure $CONF
+
 RUN autoconf
 RUN make -j
 RUN make install
